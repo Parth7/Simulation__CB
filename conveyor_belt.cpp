@@ -6,12 +6,12 @@
 #include"shuffling.h"
 #include <iostream>
 
-CBelt::CBelt(int lb, int lr) : length_belt(lb), length_random(lr) 
+CBelt::CBelt(int lb, int lr) : length_belt(lb), length_random(lr), sh(new shuffling(length_random))
 {
     // instead of directly using a pointer to random number generation class we could have used a wrapper class
     // that creates a copy of rng class object that is specific for this conveyor belt.
     // if there was a other class using the same object and deletes the object after use, we will be left with a dangling pointer.
-    sh = new shuffling(length_random);
+    //sh = new shuffling(length_random);
 
     // can use enums instead of magic numbers here
     // not a scalable solution but decided to use this hack of repeating A twice to get the 2/5 probability of selecting it.
@@ -68,6 +68,11 @@ void CBelt::get_final() const
 {
     std::cout<<"No. of final products created : "<<count_products<< std::endl;
     std::cout<<"No of unused components left on the conveyor belt : " << count_unused << std::endl;
+}
+
+CBelt::~CBelt()
+{
+    delete sh;
 }
 
 

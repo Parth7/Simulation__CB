@@ -30,6 +30,7 @@ private:
 public:
     std::vector<std::string> belt;
     CBelt(int lb,int lr);
+    ~CBelt();
     void init();
     void count_state();
     void get_final() const;
